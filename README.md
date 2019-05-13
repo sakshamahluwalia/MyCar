@@ -1,2 +1,3 @@
 # MyCar
-- Custom Dial - Map for navigation
+- Custom Dial 
+- Map for navigation
