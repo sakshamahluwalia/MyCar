@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore
+from PyQt5.QtCore import Qt
 
 
 class View_:
@@ -14,14 +15,15 @@ class View_:
         '''
 
         # Create label
-        self.test_label = QLabel("100")
+        self.test_label = QLabel("1000")
+        self.test_label.setAlignment(Qt.AlignCenter)
 
         # obd labels (not added to layout)
-        self.rpm_label = QLabel("rpm")
-
+        self.rpm_label = QLabel("100")
+        self.rpm_label.setAlignment(Qt.AlignCenter)
 
         # Create layout and add widgets
-        self.layout = QVBoxLayout()
+        self.layout = QHBoxLayout()
         self.get_layout().addWidget(self.get_test_label())
 
         self.get_layout().addWidget(self.get_rpm_label())
@@ -37,7 +39,7 @@ class View_:
         Return value  : None
         show the widget (view)
         '''
-        self.get_widget().show()
+        self.get_widget().showMaximized()
 
     def get_widget(self):
         '''
@@ -50,7 +52,7 @@ class View_:
     def get_layout(self):
         '''
         Incoming param: View_ self
-        Return value  : QVBoxLayout
+        Return value  : QHBoxLayout
         return the layout
         '''
         return self.layout
@@ -87,5 +89,5 @@ class View_:
         Return value  : None
         Update the label
         '''
-        x = int(self.get_test_label().text())+1
+        x = int(self.get_test_label().text())+10
         self.get_test_label().setText(str(x))
