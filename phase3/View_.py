@@ -22,12 +22,14 @@ class View_:
         self.rpm_label = QLabel("100")
         self.rpm_label.setAlignment(Qt.AlignCenter)
 
+        self.speed_label = QLabel("200")
+        self.speed_label.setAlignment(Qt.AlignCenter)
+
         # Create layout and add widgets
         self.layout = QHBoxLayout()
-        self.get_layout().addWidget(self.get_test_label())
-
-        self.get_layout().addWidget(self.get_rpm_label())
-
+        # self.addWidget(self.get_test_label())
+        self.addWidget(self.get_rpm_label())
+        self.addWidget(self.get_speed_label())
 
         # Apply layout to widget
         self.widget = QWidget()
@@ -57,6 +59,15 @@ class View_:
         '''
         return self.layout
 
+    def addWidget(self, widget):
+        '''
+        Incoming param: View_ self
+                        QWidget widget
+        Return value  : None
+        Add widget to the layout
+        '''
+        self.get_layout().addWidget(widget)
+
     def get_rpm_label(self):
         '''
         Incoming param: View_ self
@@ -73,6 +84,23 @@ class View_:
         Update the rpm_label
         '''
         self.get_rpm_label().setText(str(value))
+
+    def get_speed_label(self):
+        '''
+        Incoming param: View_ self
+        Return value  : Qlable
+        return the speed_label
+        '''
+        return self.speed_label
+
+    def set_speed_label(self, value):
+        '''
+        Incoming param: View_ self
+                        Str   value
+        Return value  : None
+        Update the speed_label
+        '''
+        self.get_speed_label().setText(str(value))
 
     # for test purposes. Should be deleted in final build
     def get_test_label(self):

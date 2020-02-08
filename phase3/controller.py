@@ -1,5 +1,5 @@
 from model import Connection as conn
-
+import obd
 from View_ import *
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore
@@ -11,15 +11,15 @@ class Controller:
     # watch cmds -> start -> show -> exit (later) -> stop_connection
     def __init__(self):
 
-        # self.conn = conn.Connection()
+        self.conn = conn.Connection()
         self.app = QApplication([])
         self.view = View_(self.app)
 
-
         # This block of code represents the watch commmands.
         # watch commands will call functions from this file
-        # self.conn.get_connection().watch(obd.commands.RPM, callback=self.update_rpm) ??
-        # self.conn.start_connection()
+        self.conn.get_connection().watch(obd.commands.RPM, callback=self.update_rpm)
+        self.conn.get_connection().watch(obd.commands.SPEED, callback=self.update_speed)
+        self.conn.start_connection()
 
         self.view.show_view()
 
@@ -28,13 +28,13 @@ class Controller:
 
 
         self.timer = QtCore.QTimer()
-        self.timer.timeout.connect(lambda: self.update(self.view))
+        # self.timer.timeout.connect(lambda: self.update(self.view))
         # self.timer.timeout.connect(lambda: self.update_rpm("updated")) --tested
         self.timer.start(500)
 
 
         self.app.exec_()
-        # self.conn.stop_connection()
+        self.conn.stop_connection()
 
 
     def update(self, view):
@@ -45,8 +45,10 @@ class Controller:
 
     # use with obd
     def update_rpm(self, rpm):
-        self.view.set_rpm_label(rpm.value)
+        self.view.set_rpm_label(rpm.value.magnitude)
 
+    def update_speed(self, speed):
+        self.view.set_speed_label(speed.value.magnitude)
 
 if __name__ == '__main__':
     controller = Controller()

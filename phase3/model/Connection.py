@@ -6,7 +6,7 @@ class Connection:
     def __init__(self, portstr_='/dev/rfcomm0'):
 
         self.connection = "change flag to true to use OBD"
-        if False:
+        if True:
             self.connection = obd.Async(portstr=portstr_, fast=False)
         print(self.get_connection())
 
