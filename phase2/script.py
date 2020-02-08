@@ -3,7 +3,7 @@ import obd
 obd.logger.setLevel(obd.logging.DEBUG)
 ports = obd.scan_serial()
 
-connection = obd.OBD() # auto-connects to USB or RF port
+connection = obd.OBD(portstr='/dev/rfcomm1') # auto-connects to USB or RF port
 
 cmd = obd.commands.SPEED # select an OBD command (sensor)
 
