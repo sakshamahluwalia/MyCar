@@ -1,0 +1,29 @@
+<!doctype html>
+<h1>Hello the value is: <span id="rpm"></span></h1>
+
+<script type = "text/JavaScript">
+  function httpGet()
+  {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open( "GET", "/val", false ); // false for synchronous request
+      xmlHttp.send( null );
+      document.querySelector("#rpm").innerHTML = xmlHttp.responseText;
+      return xmlHttp.responseText;
+  }
+
+  function httpUpdateVal()
+  {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open( "GET", "/update", false ); // false for synchronous request
+      xmlHttp.send( null );
+      return xmlHttp.responseText;
+  }
+
+  function workflow() {
+    httpGet();
+    httpUpdateVal();
+  }
+  console.log("hit");
+  setInterval(workflow, 0);
+
+</script>
