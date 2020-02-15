@@ -1,4 +1,5 @@
 <!doctype html>
+<h1>Hello the value is: <span id="val"></span></h1>
 <h1>Hello the value is: <span id="rpm"></span></h1>
 
 <script type = "text/JavaScript">
@@ -7,9 +8,19 @@
       var xmlHttp = new XMLHttpRequest();
       xmlHttp.open( "GET", "/val", false ); // false for synchronous request
       xmlHttp.send( null );
+      document.querySelector("#val").innerHTML = xmlHttp.responseText;
+      return xmlHttp.responseText;
+  }
+
+  function httpGetrpm()
+  {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.open( "GET", "/rpm", false ); // false for synchronous request
+      xmlHttp.send( null );
       document.querySelector("#rpm").innerHTML = xmlHttp.responseText;
       return xmlHttp.responseText;
   }
+
 
   function httpUpdateVal()
   {
@@ -21,9 +32,20 @@
 
   function workflow() {
     httpGet();
+    httpGetrpm();
     httpUpdateVal();
   }
+
+  function end() {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", "/end", false ); // false for synchronous request
+    xmlHttp.send( null );
+    console.log(xmlHttp.responseText)
+    return xmlHttp.responseText;
+  }
+
   console.log("hit");
   setInterval(workflow, 0);
+  setInterval(end, 40000);
 
 </script>
