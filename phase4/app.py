@@ -1,24 +1,19 @@
-import obd
+import obd, time
+from model import values as vals
+from model import connection as conn
 from flask import Flask, request, render_template
+
+
 app = Flask(__name__)
 
-global var
 global connection
-global rpm
-rpm = 0
-var = 0
+global values_
 
 def initialize():
-
+    global values_
     global connection
-    connection = obd.Async(portstr="/dev/rfcomm0", fast=False)
-
-    connection.watch(obd.commands.RPM, callback=update_rpm)
-    connection.start()
-
-def update_rpm(rev):
-    global rpm
-    rpm = rev.value.magnitude
+    values_ = vals.values()
+    connection = conn.connection(values_)
 
 initialize()
 
@@ -26,24 +21,13 @@ initialize()
 def hello_world():
     return render_template('index.html')
 
-@app.route('/rpm')
-def get_rpm():
-    global rpm
-    return {'rpm': rpm}
-
 @app.route('/val')
 def get_val():
-    global var
-    return {'val': var}
+    global values_
+    return {'val': values_.get_test()}
 
 @app.route('/update')
 def update():
-    global var
-    var += 1
-    return {'res': 'updated'}
-
-@app.route('/end')
-def end():
     global connection
-    connection.stop()
-    return "connection stopped"
+    connection.update_test()
+    return {'res': 'updated'}
