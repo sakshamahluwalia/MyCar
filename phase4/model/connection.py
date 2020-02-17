@@ -20,7 +20,7 @@ class connection:
         Initialize obd connection and add commands on watch-list
         to update fields in values
         """
-        
+
         print("DEBUG: init connection")
 
         self.values = values
@@ -39,8 +39,11 @@ class connection:
         """
 
         tmp_ = self.values.get_test()
-        tmp_ += 1
+        tmp_1 = self.values.get_test1()
+        tmp_ += 100
+        tmp_1 += 10
         self.values.set_test(tmp_)
+        self.values.set_test1(tmp_1)
 
     def get_connection(self):
         '''

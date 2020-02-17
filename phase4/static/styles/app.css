@@ -1,0 +1,31 @@
+.container {
+  color: whitesmoke;
+  background-color: black;
+}
+
+.col-sm {
+  text-align: center;
+}
+
+.vertical-align-outer {
+  display: flex;
+  align-items: center;
+  min-height: -webkit-fill-available;
+  min-width: -webkit-fill-available;
+}
+
+.vertical-align-inner {
+  width: -webkit-fill-available;
+}
+
+.bigrem {
+  font-size: 7rem;
+}
+
+.smallrem {
+  font-size: 1rem;
+}
+
+.red {
+  color: red;
+}

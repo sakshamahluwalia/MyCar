@@ -1,31 +1,97 @@
 <!doctype html>
-<h1>Hello the value is: <span id="val"></span></h1>
 
-<script type = "text/JavaScript">
-  function httpGet()
-  {
-      var xmlHttp = new XMLHttpRequest();
-      xmlHttp.open( "GET", "/val", false ); // false for synchronous request
-      xmlHttp.send( null );
-      document.querySelector("#val").innerHTML = xmlHttp.responseText;
-      return xmlHttp.responseText;
-  }
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>MyCar</title>
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/app.css') }}">
+</head>
+<body>
 
-  function httpUpdateVal()
-  {
-      var xmlHttp = new XMLHttpRequest();
-      xmlHttp.open( "GET", "/update", false ); // false for synchronous request
-      xmlHttp.send( null );
-      return xmlHttp.responseText;
-  }
+  <div class="container vertical-align-outer">
+    <div class="row vertical-align-inner">
+      <div class="col-sm">
+        <h1><span id="val" class="bigrem"><span id="first-val-letter-rpm">0</span><span id="other-val-letter-rpm"></span></span><span class="smallrem red">rpm</span>
+      </div>
+      <div class="col-sm">
+        <h1><span id="val1"class="bigrem"><span id="first-val-letter-speed">0</span><span id="other-val-letter-speed"></span></span><span class="smallrem red">km/h</span>
+      </div>
+    </div>
+  </div>
 
-  function workflow() {
-    httpGet();
-    httpUpdateVal();
-  }
+  <script type = "text/JavaScript">
+    function httpGet()
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", "/val", false ); // false for synchronous request
+        xmlHttp.send( null );
+        value = parseInt(xmlHttp.responseText.substring(7, xmlHttp.responseText.length-2));
+        console.log(value);
+        console.log(xmlHttp.responseText);
+        console.log(xmlHttp.responseText.substring(7, 8));
+        console.log(xmlHttp.responseText.substring(8, xmlHttp.responseText.length-2))
+        // document.querySelector("#first-val-letter-rpm").innerHTML = xmlHttp.responseText.substring(7, 8);
+        // document.querySelector("#other-val-letter-rpm").innerHTML = xmlHttp.responseText.substring(8, xmlHttp.responseText.length-2);
+        if (value < 1000 ) {
+          document.querySelector("#first-val-letter-rpm").innerHTML = 0;
+          document.querySelector("#other-val-letter-rpm").innerHTML = xmlHttp.responseText.substring(7, xmlHttp.responseText.length-2);
+          apply_color("#first-val-letter-rpm", "gray");
+        } else {
+          document.querySelector("#first-val-letter-rpm").innerHTML = xmlHttp.responseText.substring(7, 8);
+          document.querySelector("#other-val-letter-rpm").innerHTML = xmlHttp.responseText.substring(8, xmlHttp.responseText.length-2);
+          apply_color("#first-val-letter-rpm", "whitesmoke");
+        }
+        return xmlHttp.responseText;
+    }
 
-  console.log("hit");
-  setInterval(workflow, 0);
+    function httpGet1()
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", "/val1", false ); // false for synchronous request
+        xmlHttp.send( null );
+        // document.querySelector("#first-val-letter-speed").innerHTML = xmlHttp.responseText.substring(7, 8);
+        // document.querySelector("#other-val-letter-speed").innerHTML = xmlHttp.responseText.substring(8, xmlHttp.responseText.length-2);
+        value = parseInt(xmlHttp.responseText.substring(7, xmlHttp.responseText.length-2));
+        if (value < 100) {
+          document.querySelector("#first-val-letter-speed").innerHTML = 0;
+          document.querySelector("#other-val-letter-speed").innerHTML = xmlHttp.responseText.substring(7, xmlHttp.responseText.length-2);
+          apply_color("#first-val-letter-speed", "gray");
+        } else {
+          document.querySelector("#first-val-letter-speed").innerHTML = xmlHttp.responseText.substring(7, 8);
+          document.querySelector("#other-val-letter-speed").innerHTML = xmlHttp.responseText.substring(8, xmlHttp.responseText.length-2);
+          apply_color("#first-val-letter-speed", "whitesmoke");
+        }
+        return xmlHttp.responseText;
+    }
 
-</script>
+    function httpUpdateVal()
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", "/update", false ); // false for synchronous request
+        xmlHttp.send( null );
+        return xmlHttp.responseText;
+    }
+
+    function apply_color(id, color) {
+      var og = document.querySelector(id).innerHTML;
+      document.querySelector(id).innerHTML = og.fontcolor(color);
+    }
+
+    function workflow() {
+      httpGet();
+      httpGet1();
+      httpUpdateVal();
+    }
+
+    console.log("hit");
+    // workflow();
+    setInterval(workflow, 2000);
+
+  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -15,7 +15,8 @@ class values:
         """
         print("DEBUG: init values")
 
-        self.test = 0
+        self.test = 500
+        self.test1 = 0
 
         # use after starting obd connection
         self.rpm = 0
@@ -25,6 +26,12 @@ class values:
 
     def set_test(self, value):
         self.test = value
+
+    def get_test1(self):
+        return self.test1
+
+    def set_test1(self, value):
+        self.test1 = value
 
     def get_rpm(self):
         return self.rpm

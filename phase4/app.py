@@ -26,6 +26,11 @@ def get_val():
     global values_
     return {'val': values_.get_test()}
 
+@app.route('/val1')
+def get_val1():
+    global values_
+    return {'val': values_.get_test1()}
+
 @app.route('/update')
 def update():
     global connection
