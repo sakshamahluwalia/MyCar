@@ -1,7 +1,7 @@
 import obd, time
 from model import values as vals
 from model import connection as conn
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 
 
 app = Flask(__name__)
@@ -24,15 +24,15 @@ def hello_world():
 @app.route('/val')
 def get_val():
     global values_
-    return {'val': values_.get_test()}
+    return jsonify({'val': values_.get_test()})
 
 @app.route('/val1')
 def get_val1():
     global values_
-    return {'val': values_.get_test1()}
+    return jsonify({'val': values_.get_test1()})
 
 @app.route('/update')
 def update():
     global connection
     connection.update_test()
-    return {'res': 'not updated'}
+    return jsonify({'res': 'not updated'})
