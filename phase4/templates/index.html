@@ -27,22 +27,23 @@
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open( "GET", "/val", false ); // false for synchronous request
         xmlHttp.send( null );
-        value = parseInt(xmlHttp.responseText.substring(7, xmlHttp.responseText.length-2));
-        data = JSON.parse(xmlHttp.responseText);
-	console.log(value);
-        // console.log(xmlHttp.responseText);
-	console.log(data['val']);
-        // console.log(xmlHttp.responseText.substring(7, 8));
-        // console.log(xmlHttp.response()})Text.substring(8, xmlHttp.responseText.length-2))
+
+        let data = JSON.parse(xmlHttp.responseText);
+
+        let value = parseInt(data['val']);
+        let rpm_ = JSON.stringify(data['val'])
+
+        // console.log(rpm_.substring(0, 1));
+        // console.log(rpm_.substring(1));
         // document.querySelector("#first-val-letter-rpm").innerHTML = xmlHttp.responseText.substring(7, 8);
         // document.querySelector("#other-val-letter-rpm").innerHTML = xmlHttp.responseText.substring(8, xmlHttp.responseText.length-2);
         if (value < 1000 ) {
           document.querySelector("#first-val-letter-rpm").innerHTML = 0;
-          document.querySelector("#other-val-letter-rpm").innerHTML = xmlHttp.responseText.substring(7, xmlHttp.responseText.length-2);
+          document.querySelector("#other-val-letter-rpm").innerHTML = rpm_;
           apply_color("#first-val-letter-rpm", "gray");
         } else {
-          document.querySelector("#first-val-letter-rpm").innerHTML = xmlHttp.responseText.substring(7, 8);
-          document.querySelector("#other-val-letter-rpm").innerHTML = xmlHttp.responseText.substring(8, xmlHttp.responseText.length-2);
+          document.querySelector("#first-val-letter-rpm").innerHTML = rpm_.substring(0, 1);
+          document.querySelector("#other-val-letter-rpm").innerHTML = rpm_.substring(1);
           apply_color("#first-val-letter-rpm", "whitesmoke");
         }
         return xmlHttp.responseText;
@@ -53,16 +54,23 @@
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open( "GET", "/val1", false ); // false for synchronous request
         xmlHttp.send( null );
+
+        let data = JSON.parse(xmlHttp.responseText);
+
+        let value = parseInt(data['val']);
+        let speed = JSON.stringify(data['val'])
+
+        console.log(speed.substring(0, 1));
+        console.log(speed.substring(1));
         // document.querySelector("#first-val-letter-speed").innerHTML = xmlHttp.responseText.substring(7, 8);
         // document.querySelector("#other-val-letter-speed").innerHTML = xmlHttp.responseText.substring(8, xmlHttp.responseText.length-2);
-        value = parseInt(xmlHttp.responseText.substring(7, xmlHttp.responseText.length-2));
         if (value < 100) {
           document.querySelector("#first-val-letter-speed").innerHTML = 0;
-          document.querySelector("#other-val-letter-speed").innerHTML = xmlHttp.responseText.substring(7, xmlHttp.responseText.length-2);
+          document.querySelector("#other-val-letter-speed").innerHTML = speed;
           apply_color("#first-val-letter-speed", "gray");
         } else {
-          document.querySelector("#first-val-letter-speed").innerHTML = xmlHttp.responseText.substring(7, 8);
-          document.querySelector("#other-val-letter-speed").innerHTML = xmlHttp.responseText.substring(8, xmlHttp.responseText.length-2);
+          document.querySelector("#first-val-letter-speed").innerHTML = speed.substring(0, 1);
+          document.querySelector("#other-val-letter-speed").innerHTML = speed.substring(1);
           apply_color("#first-val-letter-speed", "whitesmoke");
         }
         return xmlHttp.responseText;
