@@ -82,12 +82,13 @@
     function workflow() {
       httpGet();
       httpGet1();
-      httpUpdateVal();
+      // httpUpdateVal();
     }
 
     console.log("hit");
     // workflow();
-    setInterval(workflow, 2000);
+    console.log("Interval set to 1 second")
+    setInterval(workflow, 1000);
 
   </script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

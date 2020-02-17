@@ -27,6 +27,9 @@ class connection:
         self.connection = "change flag to true to use OBD"
         if False:
             self.connection = obd.Async(portstr=portstr_, fast=False)
+            self.connection.watch(obd.commands.RPM, callback=self.update_rpm)
+            self.connection.watch(obd.commands.SPEED, callback=self.update_speed)
+            self.start_connection()
         print(self.get_connection())
 
         # add block with watch statements
@@ -44,6 +47,15 @@ class connection:
         tmp_1 += 10
         self.values.set_test(tmp_)
         self.values.set_test1(tmp_1)
+
+    def get_values(self):
+        return self.values
+
+    def update_rpm(self, rpm):
+        self.get_values().set_test(rpm.magnitude)
+
+    def update_speed(self, speed):
+        self.get_values().set_test1(speed.magnitude)
 
     def get_connection(self):
         '''

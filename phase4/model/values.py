@@ -15,7 +15,7 @@ class values:
         """
         print("DEBUG: init values")
 
-        self.test = 500
+        self.test = 0
         self.test1 = 0
 
         # use after starting obd connection
