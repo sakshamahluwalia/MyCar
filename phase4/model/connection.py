@@ -25,7 +25,8 @@ class connection:
 
         self.values = values
         self.connection = "change flag to true to use OBD"
-        if False:
+        if True:
+            obd.logger.setLevel(obd.logging.DEBUG)
             self.connection = obd.Async(portstr=portstr_, fast=False)
             self.connection.watch(obd.commands.RPM, callback=self.update_rpm)
             self.connection.watch(obd.commands.SPEED, callback=self.update_speed)
