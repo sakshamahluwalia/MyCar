@@ -28,8 +28,10 @@
         xmlHttp.open( "GET", "/val", false ); // false for synchronous request
         xmlHttp.send( null );
         value = parseInt(xmlHttp.responseText.substring(7, xmlHttp.responseText.length-2));
-        console.log(value);
-        console.log(xmlHttp.responseText);
+        data = JSON.parse(xmlHttp.responseText);
+	console.log(value);
+        // console.log(xmlHttp.responseText);
+	console.log(data['val']);
         // console.log(xmlHttp.responseText.substring(7, 8));
         // console.log(xmlHttp.response()})Text.substring(8, xmlHttp.responseText.length-2))
         // document.querySelector("#first-val-letter-rpm").innerHTML = xmlHttp.responseText.substring(7, 8);
