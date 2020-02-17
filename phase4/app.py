@@ -34,5 +34,5 @@ def get_val1():
 @app.route('/update')
 def update():
     global connection
-    # connection.update_test()
+    connection.update_test()
     return {'res': 'not updated'}
