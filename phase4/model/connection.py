@@ -53,10 +53,10 @@ class connection:
         return self.values
 
     def update_rpm(self, rpm):
-        self.get_values().set_test(rpm.magnitude)
+        self.get_values().set_test(rpm.value.magnitude)
 
     def update_speed(self, speed):
-        self.get_values().set_test1(speed.magnitude)
+        self.get_values().set_test1(speed.value.magnitude)
 
     def get_connection(self):
         '''
